@@ -1,5 +1,5 @@
 import axios from "axios";
-import type { UserResponse } from "@/types/user.type";
+import type { UserResponse, UserDetail } from "@/types/user.type";
 
 // base axios
 const api = axios.create({
@@ -15,5 +15,5 @@ export const getUsers = (params: { limit: number; skip: number }) => {
 
 // lấy chi tiết user
 export const getUserById = (id: number) => {
-  return api.get(`/users/${id}`);
+  return api.get<UserDetail>(`/users/${id}`);
 };

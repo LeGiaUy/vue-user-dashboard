@@ -24,6 +24,17 @@ onMounted(async () => {
         {{ user.firstName }} {{ user.lastName }}
       </h1>
       <p>{{ user.email }}</p>
+      <p>Age: {{ user.age }}</p>
+      <p>Gender: {{ user.gender }}</p>
+      <p>Birthdate: {{ user.birthDate }}</p>
+      <p>Address: {{ user.address.address }}</p>
+      <p>City: {{ user.address.city }}</p>
+      <p>State: {{ user.address.state }}</p>
+      <p>Postal Code: {{ user.address.postalCode }}</p>
+      <p>Country: {{ user.address.country }}</p>
+      <p>Phone: {{ user.phone }}</p>
+      <p>Height: {{ user.height }}</p>
+      <p>Weight: {{ user.weight }}</p>
     </div>
   </div>
 </template>
