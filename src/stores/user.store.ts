@@ -6,7 +6,6 @@ export const useUserStore = defineStore("user", {
   state: () => ({
     users: [] as User[],
     loading: false,
-    loadingMore: false,
     page: 1,
     limit: 10,
     total: 0,
@@ -30,30 +29,6 @@ export const useUserStore = defineStore("user", {
         this.total = res.data.total;
       } finally {
         this.loading = false;
-      }
-    },
-
-    // infinite scroll
-    async loadMore() {
-      if (this.users.length >= this.total) return;
-      if (this.loading || this.loadingMore) return;
-
-      this.loadingMore = true;
-
-      try {
-        this.page++;
-
-        const skip = (this.page - 1) * this.limit;
-
-        const res = await getUsers({
-          limit: this.limit,
-          skip,
-        });
-
-        // nối mảng
-        this.users.push(...res.data.users);
-      } finally {
-        this.loadingMore = false;
       }
     },
   },
