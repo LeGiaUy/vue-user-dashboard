@@ -20,5 +20,10 @@ defineProps<{
     <div class="text-sm text-gray-500">Age: {{ user.age }}</div>
     <div class="text-sm text-gray-500">Gender: {{ user.gender }}</div>
     <div class="text-sm text-gray-500">Role: {{ user.role }}</div>
+    <div class="text-sm text-gray-500">Company: {{ user.company.name }}</div>
+    <div class="text-sm text-gray-500">
+      Department: {{ user.company.department }}
+    </div>
+    <div class="text-sm text-gray-500">Title: {{ user.company.title }}</div>
   </router-link>
 </template>
