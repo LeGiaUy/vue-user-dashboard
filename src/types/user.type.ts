@@ -7,6 +7,15 @@ export interface User {
   image: string;
   age: number;
   gender: string;
+  role: string;
+  company: Company;
+}
+
+export interface Company {
+  name: string;
+  department: string;
+  title: string;
+  address: Address;
 }
 
 export interface Coordinate {
@@ -36,4 +45,5 @@ export interface UserResponse {
   total: number;
   skip: number;
   limit: number;
+  role: string;
 }
