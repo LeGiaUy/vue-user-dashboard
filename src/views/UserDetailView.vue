@@ -27,8 +27,8 @@ onMounted(async () => {
     const res = await getUserById(id);
     // gán user vào state
     user.value = res.data;
-    // thêm user vào store để lần sau không gọi nữa
-    store.users.push(res.data);
+    // lưu user vào store
+    store.addUserToStore(res.data);
   }
 });
 </script>

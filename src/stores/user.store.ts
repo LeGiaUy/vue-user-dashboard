@@ -31,5 +31,15 @@ export const useUserStore = defineStore("user", {
         this.loading = false;
       }
     },
+
+    /** thêm user vào store */
+    addUserToStore(user: User) {
+      /** tìm user có tồn tại trong store không */
+      const exists = this.users.some((u) => u.id === user.id);
+
+      if (!exists) {
+        this.users.push(user);
+      }
+    },
   },
 });
