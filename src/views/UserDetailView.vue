@@ -4,14 +4,32 @@ import { useRoute } from "vue-router";
 import { getUserById } from "@/api/user.api";
 import UserDetailSkeleton from "@/components/UserDetailSkeleton.vue";
 import type { UserDetail } from "@/types/user.type";
+import { useUserStore } from "@/stores/user.store";
 
 const route = useRoute();
 const user = ref<UserDetail | null>(null);
+const store = useUserStore();
 
 onMounted(async () => {
-  const id = Number(route.params.id); // lấy params
-  const res = await getUserById(id);
-  user.value = res.data;
+  /** lấy id từ query string */
+  const id = Number(route.params.id);
+  /** tìm kiếm user trong store */
+  const cachedUser = store.users.find((u) => u.id === id);
+
+  // nếu tìm thấy user trong store thì lấy ra dùng luôn
+  if (cachedUser) {
+    // gán user vào state
+    user.value = cachedUser as UserDetail;
+
+    // nếu không thấy user trong store thì gọi api
+  } else {
+    // gọi api lấy user
+    const res = await getUserById(id);
+    // gán user vào state
+    user.value = res.data;
+    // thêm user vào store để lần sau không gọi nữa
+    store.users.push(res.data);
+  }
 });
 </script>
 
