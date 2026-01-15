@@ -20,7 +20,7 @@ export const useUserStore = defineStore("user", {
 
   actions: {
     // fetch user (pagination)
-    async fetchUsers(params: { page?: number } = {}) {
+    async fetchUsers(params: { page?: number; limit?: number } = {}) {
       /** nếu có params.page thì lấy params.page, không có thì lấy this.page */
       const targetPage = params.page || this.page;
       // đặt loading = true để hiện skeleton

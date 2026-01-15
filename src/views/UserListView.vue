@@ -1,14 +1,20 @@
 <script setup lang="ts">
-import { onMounted } from "vue";
 import { useUserStore } from "@/stores/user.store";
 import UserCard from "@/components/UserCard.vue";
 import UserSkeleton from "@/components/UserSkeleton.vue";
+import { usePagination } from "@/composables/usePagination";
+import BasePagination from "@/components/BasePagination.vue";
 
 const store = useUserStore();
 
-onMounted(() => {
-  store.fetchUsers();
-});
+const fetchUsers = async (page: number, limit: number) => {
+  store.page = page;
+  store.limit = limit;
+
+  await store.fetchUsers();
+};
+
+const { currentPage, changePage } = usePagination(fetchUsers, 12);
 </script>
 
 <template>
@@ -36,6 +42,13 @@ onMounted(() => {
           <UserCard v-for="user in store.users" :key="user.id" :user="user" />
         </template>
       </div>
+      <!-- pagination -->
+      <BasePagination
+        v-model="currentPage"
+        :total="store.total"
+        :limit="store.limit"
+        @change="changePage"
+      />
     </div>
   </div>
 </template>
