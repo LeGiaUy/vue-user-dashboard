@@ -7,7 +7,7 @@ export const useUserStore = defineStore("user", {
     users: [] as User[],
     loading: false,
     page: 1,
-    limit: 10,
+    limit: 12,
     total: 0,
   }),
 
